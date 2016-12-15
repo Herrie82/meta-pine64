@@ -29,15 +29,6 @@
 
   ```
 
-  Download and untar linaro gnueabihf toolchain which will be used for compiling u-boot:
-  (Note: this toolchain is for 64-bits host machines, if your PC is not 64 bits you need to compile a 32 bits linaro toolchain.)
-
-  ```shell
-    mkdir ~/linaro-gnueabihf && cd ~/linaro-gnueabihf
-    wget https://releases.linaro.org/components/toolchain/binaries/latest-5/arm-linux-gnueabihf/gcc-linaro-5.3.1-2016.05-x86_64_arm-linux-gnueabihf.tar.xz
-    tar xvf gcc-linaro-5.3.1-2016.05-x86_64_arm-linux-gnueabihf.tar.xz --strip 1
-  ```
-
   To initialize the build environment of Yocto, execute:
 
   ```shell
@@ -66,11 +57,40 @@
     MACHINE ?= "pine64"
   ```
 
-  Additionally, add the following line to your local.conf to opt for linaro toolchain:
+## CONFIGURATION ##
+
+  This BSP layer can produce software using the vendor BSP-based 3.10 kernel (the longsleep kernel) as used in OS images downloadable from pine64.org.  Alternately you can choose to use one of two upstream Linux kernels: A close-to-mainline kernel from Andre Przywara (includes code not in mainline) or a close-to-mainline kernel from Linus Torvalds (pristine mainline).
+
+  The mainline options have reduced functionality compared to the longsleep kernel, so if all you want is a functional system, use the longsleep kernel.
+
+  To use the longsleep kernel, download and untar linaro gnueabihf toolchain which will be used for compiling u-boot:
+  (Note: this toolchain is for 64-bits host machines, if your PC is not 64 bits you need to compile a 32 bits linaro toolchain.)
+
+  ```shell
+    mkdir ~/linaro-gnueabihf && cd ~/linaro-gnueabihf
+    wget https://releases.linaro.org/components/toolchain/binaries/latest-5/arm-linux-gnueabihf/gcc-linaro-5.3.1-2016.05-x86_64_arm-linux-gnueabihf.tar.xz
+    tar xvf gcc-linaro-5.3.1-2016.05-x86_64_arm-linux-gnueabihf.tar.xz --strip 1
+  ```
+
+  Additionally, add the following line to your local.conf to specify the path to the Linaro toolchain:
 
   ```shell
     # Substitute ME by your username or whatever path you unpacked linaro gnu eabihf
     LINARO_EABIHF_PATH = "/home/ME/linaro-gnueabihf"
+  ```
+
+  To use the upstream kernel from Andre Przywara, add the following to your local.conf:
+
+  ```shell
+    PINE64_USE_VENDOR_BSP = "0"
+    UPSTREAM_USE_APRITZEL_KERNEL = "1"
+  ```
+
+  To use the upstream kernel from Linus Torvalds, add the following to your local.conf:
+
+  ```shell
+    PINE64_USE_VENDOR_BSP = "0"
+    UPSTREAM_USE_APRITZEL_KERNEL = "0"
   ```
 
 ## USAGE ##

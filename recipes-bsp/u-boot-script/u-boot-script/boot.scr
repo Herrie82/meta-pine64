@@ -1,0 +1,9 @@
+# Set the ethaddr variable to that printed on the label on the bottom of
+# your board.  If you do not do this, a generated locally administered MAC
+# will be generated with each boot.
+# setenv ethaddr 00:06:dc:2e:ad:67
+setenv bootargs console=${console} earlycon=uart,mmio32,0x01c28000 mac_addr=${ethaddr} root=/dev/mmcblk0p2 rootwait panic=10 ${extra}
+# TODO: How are we supposed to detect whether we're a plus or not?
+fatload mmc 0:1 ${fdt_addr_r} ${fdtfile}; fdt addr ${fdt_addr_r}; fdt resize
+fatload mmc 0:1 ${kernel_addr_r} Image
+booti ${kernel_addr_r} - ${fdt_addr_r}

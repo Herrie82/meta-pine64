@@ -1,0 +1,8 @@
+# short-description: Create Pine64 SD card image
+# long-description: Creates a partitioned SD card image. Boot files
+# are located in the first vfat partition and raw bootloaders are
+# placed in the raw SD.
+
+part loaders --source rawcopy --sourceparams="file=boot-firmware.bin" --ondisk mmcblk --no-table --align 8
+part /boot --source bootimg-partition --ondisk mmcblk --fstype=vfat --label pine64 --active --align 32
+part / --source rootfs --ondisk mmcblk --fstype=ext3 --label platform --align 32
