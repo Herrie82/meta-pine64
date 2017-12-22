@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = 'file://license.md;md5=829bdeb34c1d9044f393d5a16c068371'
 
 BRANCH = "allwinner"
 SRC_URI = "git://github.com/apritzel/arm-trusted-firmware.git;protocol=git;branch=${BRANCH};destsuffix=${PN}-${PV}"
-SRCREV = "87e8aedd80e6448a55b2328768d956fcb5f5d410"
+SRCREV = "91f2402d941036a0db092d5375d0535c270b9121"
 
 COMPATIBLE_MACHINE = "pine64"
 PLATFORM_pine64 = "sun50iw1p1"

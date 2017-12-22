@@ -9,8 +9,6 @@ BOOT_FIRMWARE_BINARYNAME ?= "boot-firmware.bin"
 BOOT_FIRMWARE_IMAGE ?= "${BOOT_FIRMWARE_BINARYNAME}-${MACHINE}-${PV}-${PR}"
 BOOT_FIRMWARE_SYMLINK ?= "${BOOT_FIRMWARE_BINARYNAME}-${MACHINE}"
 
-SRC_URI += "file://09-de2-setup-simplefb.patch"
-
 do_compile_prepend() {
 	export BL31="${DEPLOY_DIR_IMAGE}/bl31-${MACHINE}.bin"
 }
@@ -48,4 +46,5 @@ do_deploy_append() {
     fi
 }
 
-COMPATIBLE_MACHINE = "^(pine64)$"
+COMPATIBLE_MACHINE = ""
+COMPATIBLE_MACHINE_pine64 = "pine64"
