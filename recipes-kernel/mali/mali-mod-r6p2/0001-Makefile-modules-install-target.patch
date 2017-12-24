@@ -1,0 +1,12 @@
+--- a/Makefile	2017-12-24 20:36:42.756758949 +0000
++++ b/Makefile	2017-12-24 20:37:58.396217854 +0000
+@@ -202,6 +202,9 @@
+ clean:
+ 	$(MAKE) ARCH=$(ARCH) -C $(KDIR) M=$(CURDIR) clean
+ 
++modules_install: modules
++	$(MAKE) ARCH=$(ARCH) -C $(KDIR) M=$(CURDIR) modules_install
++
+ install: modules
+ 	$(MAKE) ARCH=$(ARCH) -C $(KDIR) M=$(CURDIR) INSTALL_MOD_PATH=$(INSTALL_MOD_PATH) modules_install
+ 
